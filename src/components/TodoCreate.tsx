@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import { useTodoDispatch, useTodoNextId } from '../TodoContext';
 
 const TodoCreate = () => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
+  const [open, setOpen] = useState<boolean>(false);
+  const [value, setValue] = useState<string>('');
 
   const nextId = useTodoNextId();
   const dispatch = useTodoDispatch();
 
   const onToggle = () => setOpen(!open);
-  const onChange = (e) => setValue(e.target.value);
-  const onSubmit = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+  const onSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch({
       type: 'CREATE',

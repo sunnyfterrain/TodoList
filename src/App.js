@@ -1,17 +1,11 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import TodoCreate from './components/TodoCreate';
+import TodoCreate from './components/TodoCreate.tsx';
 import TodoHead from './components/TodoHead';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/TodoTemplate';
 import { TodoProvider } from './TodoContext';
+import GlobalStyle from './styles/GlobalStyle';
 
-const GlobalStyle = createGlobalStyle`
-body {
-  background: #e9ecef;
-
-}
-`;
 function App() {
   return (
     <TodoProvider>

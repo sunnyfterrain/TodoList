@@ -2,15 +2,14 @@ import React from 'react';
 import { useTodoState } from '../TodoContext';
 import styled from 'styled-components';
 import TodoItem from './TodoItem';
-
-const TotoListBlock = styled.div`
-  flex: 1;
-  padding: 20px 32px;
-  overflow-y: auto;
-`;
+import { useSelector } from 'react-redux';
 
 const TodoList = () => {
-  const todos = useTodoState();
+  // const todos = useTodoState();
+
+  const todos = useSelector((state) => {
+    return state.todo;
+  });
 
   return (
     <TotoListBlock>
@@ -20,5 +19,11 @@ const TodoList = () => {
     </TotoListBlock>
   );
 };
+
+const TotoListBlock = styled.div`
+  flex: 1;
+  padding: 20px 32px;
+  overflow-y: auto;
+`;
 
 export default TodoList;

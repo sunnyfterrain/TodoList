@@ -2,15 +2,21 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import { useTodoDispatch, useTodoNextId } from '../TodoContext';
+import { useDispatch } from 'react-redux';
 
 const TodoCreate = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
 
   const nextId = useTodoNextId();
-  const dispatch = useTodoDispatch();
+  // const dispatch = useTodoDispatch();
+  const dispatch = useDispatch();
 
-  const onToggle = () => setOpen(!open);
+  const onToggle = () => {
+    setOpen(!open);
+    console.log(open);
+  };
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
   const onSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -43,7 +49,7 @@ const TodoCreate = () => {
   );
 };
 
-const CircleButton = styled.button`
+const CircleButton = styled.button<CircleProps>`
   background: #0c68ab;
   &:hover {
     background: #0c68ab;

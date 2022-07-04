@@ -2,14 +2,19 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
 import { useTodoDispatch } from '../TodoContext';
+import { useDispatch } from 'react-redux';
+import { toggles } from '../redux/store';
 
 const ToDoItem = ({ done, text, id }) => {
-  const dispatch = useTodoDispatch();
+  // const dispatch = useTodoDispatch();
+  const dispatch = useDispatch();
+
   const onToggle = () => dispatch({ type: 'TOGGLE', id });
   const onRemove = () => dispatch({ type: 'REMOVE', id });
+  const toggle = () => dispatch(toggles());
   return (
     <TodoItemBlock>
-      <CheckCircle done={done} onClick={onToggle}>
+      <CheckCircle done={done} onClick={toggle}>
         {done && <MdDone />}
       </CheckCircle>
       <Text done={done}>{text}</Text>

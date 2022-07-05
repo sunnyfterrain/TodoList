@@ -1,22 +1,20 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
-import { useTodoDispatch } from '../TodoContext';
 import { useDispatch } from 'react-redux';
-import { toggles } from '../redux/store';
+import { todoActions } from '../redux/todoSlice';
 
 const ToDoItem = ({ done, text, id }) => {
-  // const dispatch = useTodoDispatch();
   const dispatch = useDispatch();
 
-  const onToggle = () => dispatch({ type: 'TOGGLE', id });
-  const onRemove = () => dispatch({ type: 'REMOVE', id });
-  const toggle = () => dispatch(toggles());
+  const onRemove = () => dispatch(todoActions.remove(id));
+  const onToggle = () => dispatch(todoActions.toggle(id));
+
   return (
     <TodoItemBlock>
-      <CheckCircle done={done} onClick={toggle}>
+      <CheckBox done={done} onClick={onToggle}>
         {done && <MdDone />}
-      </CheckCircle>
+      </CheckBox>
       <Text done={done}>{text}</Text>
       <Remove onClick={onRemove}>
         <MdDelete />
@@ -48,10 +46,9 @@ const TodoItemBlock = styled.div`
     }
   }
 `;
-const CheckCircle = styled.div`
+const CheckBox = styled.div`
   width: 32px;
   height: 32px;
-  border-radius: 16px;
   border: 1px solid #ced4da;
   font-size: 24px;
   display: flex;

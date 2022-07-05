@@ -1,36 +1,26 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-import { useTodoDispatch, useTodoNextId } from '../TodoContext';
+
 import { useDispatch } from 'react-redux';
+import { todoActions } from '../redux/todoSlice';
 
 const TodoCreate = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
 
-  const nextId = useTodoNextId();
-  // const dispatch = useTodoDispatch();
   const dispatch = useDispatch();
 
   const onToggle = () => {
     setOpen(!open);
-    console.log(open);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
   const onSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch({
-      type: 'CREATE',
-      todo: {
-        id: nextId.current,
-        text: value,
-        done: false,
-      },
-    });
+    dispatch(todoActions.create(value));
     setValue('');
     setOpen(false);
-    nextId.current += 1;
   };
 
   return (

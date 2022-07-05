@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTodoState } from '../TodoContext';
+import { useSelector } from 'react-redux';
 
 const TodoHead = () => {
-  const todos = useTodoState();
+  const todos = useSelector((state) => state.todo);
   const undoneTasks = todos.filter((todo) => !todo.done);
-
   const today = new Date();
   const option = { year: 'numeric', month: 'long', day: 'numeric' };
   const dateString = today.toLocaleDateString('ko-KR', option);

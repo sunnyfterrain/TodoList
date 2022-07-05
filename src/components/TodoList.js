@@ -5,11 +5,8 @@ import TodoItem from './TodoItem';
 import { useSelector } from 'react-redux';
 
 const TodoList = () => {
-  // const todos = useTodoState();
-  // context API
-
   const todos = useSelector((state) => state.todo);
-  console.log(todos);
+
   return (
     <TotoListBlock>
       {todos.map((todo) => {
